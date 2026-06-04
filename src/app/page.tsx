@@ -306,7 +306,7 @@ export default function Dashboard() {
         <motion.div variants={itemVariants}>
           <DashboardCard
             title="Inventory"
-            value={stats.totalProducts.toLocaleString()}
+            value={(stats as any).totalInventory?.toLocaleString() || '0'}
             subtitle="In-stock units"
             icon={<Package />}
             href="/inventory"

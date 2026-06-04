@@ -115,16 +115,12 @@ export async function GET(request: NextRequest) {
       prisma.batch.count({ where }),
     ])
 
-    // Map inventory with prices and batch names from purchase and sales orders
+    // Map inventory with prices — use batch's own prices, fallback to order prices only if batch has none
     const inventoryWithPrices = inventory.map(item => {
-      // Get the most recent batch name from purchase items or use the batch table value
-      const latestBatchName = item.product?.purchaseItems?.[0]?.batchNumber || item.batchNumber
-      
       return {
         ...item,
-        batchNumber: latestBatchName,
-        purchasePrice: item.product?.purchaseItems?.[0]?.unitPrice || 0,
-        sellingPrice: item.product?.salesItems?.[0]?.unitPrice || 0,
+        purchasePrice: item.purchasePrice ?? item.product?.purchaseItems?.[0]?.unitPrice ?? 0,
+        sellingPrice: item.sellingPrice ?? item.product?.salesItems?.[0]?.unitPrice ?? 0,
       }
     })
 

@@ -5,7 +5,7 @@ import { requireAuth } from '@/lib/auth'
 export async function GET(request: NextRequest) {
   try {
     requireAuth(request)
-    const [totalProducts, totalBrands, totalCategories, totalSizes, purchaseOrders, totalSalesOrders, lowStockItems, monthlySales] = await Promise.all([
+    const [totalProducts, totalBrands, totalCategories, totalSizes, purchaseOrders, totalSalesOrders, lowStockItems, monthlySales, totalInventory] = await Promise.all([
       prisma.product.count({ where: { isActive: true } }),
       prisma.brand.count({ where: { isActive: true } }),
       prisma.category.count({ where: { isActive: true } }),
@@ -20,7 +20,8 @@ export async function GET(request: NextRequest) {
             gte: new Date(new Date().getFullYear(), new Date().getMonth(), 1)
           }
         }
-      })
+      }),
+      prisma.batch.aggregate({ _sum: { quantity: true } })
     ])
 
     return NextResponse.json({
@@ -28,6 +29,7 @@ export async function GET(request: NextRequest) {
       totalCategories,
       totalSizes,
       totalProducts,
+      totalInventory: totalInventory._sum.quantity || 0,
       monthlySales: monthlySales._sum.totalAmount || 0,
       purchaseOrders,
       salesOrders: totalSalesOrders,
@@ -43,6 +45,7 @@ export async function GET(request: NextRequest) {
       totalCategories: 0,
       totalSizes: 0,
       totalProducts: 0,
+      totalInventory: 0,
       monthlySales: 0,
       purchaseOrders: 0,
       salesOrders: 0,
