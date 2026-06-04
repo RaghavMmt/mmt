@@ -5,15 +5,15 @@ import { requireAuth } from '@/lib/auth'
 
 const createBatchSchema = z.object({
   productId: z.string().min(1),
-  locationId: z.string().min(1).optional(),
-  batchNumber: z.string().trim().max(100).optional(),
-  shade: z.string().trim().max(100).optional(),
+  locationId: z.preprocess((v) => (v === '' ? undefined : v), z.string().min(1).optional()),
+  batchNumber: z.preprocess((v) => (v === '' ? undefined : v), z.string().trim().max(100).optional()),
+  shade: z.preprocess((v) => (v === '' ? undefined : v), z.string().trim().max(100).optional()),
   quantity: z.coerce.number().int().positive().max(1000000),
   purchasePrice: z.coerce.number().min(0).max(100000000).nullable().optional(),
   sellingPrice: z.coerce.number().min(0).max(100000000).nullable().optional(),
-  receivedDate: z.string().trim().optional().nullable(),
-  expiryDate: z.string().trim().optional().nullable(),
-  imageUrl: z.string().url().max(2000).optional().nullable(),
+  receivedDate: z.preprocess((v) => (v === '' ? undefined : v), z.string().trim().optional().nullable()),
+  expiryDate: z.preprocess((v) => (v === '' ? undefined : v), z.string().trim().optional().nullable()),
+  imageUrl: z.preprocess((v) => (v === '' ? undefined : v), z.string().url().max(2000).optional().nullable()),
 })
 
 async function getOrCreateDefaultLocation(userId: string): Promise<string> {
