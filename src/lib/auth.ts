@@ -65,3 +65,17 @@ export function getCustomerAuthUser(request: NextRequest): CustomerAuthUser | nu
     return null
   }
 }
+
+export function getAdminAuthUser(request: NextRequest): AuthUser | null {
+  try {
+    const token = request.cookies.get('auth-token')?.value
+    if (!token) return null
+    const secret = process.env.JWT_SECRET
+    if (!secret) return null
+    const decoded = jwt.verify(token, secret) as AuthUser
+    if (decoded.role !== 'ADMIN') return null
+    return decoded
+  } catch {
+    return null
+  }
+}
