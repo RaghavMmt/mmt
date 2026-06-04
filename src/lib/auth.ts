@@ -45,3 +45,23 @@ export function requireAuth(request: NextRequest): AuthUser {
   }
   return user
 }
+
+export interface CustomerAuthUser extends AuthUser {
+  customerId?: string
+  scope?: string
+  username?: string
+}
+
+export function getCustomerAuthUser(request: NextRequest): CustomerAuthUser | null {
+  try {
+    const token = request.cookies.get('auth-token')?.value
+    if (!token) return null
+    const secret = process.env.JWT_SECRET
+    if (!secret) return null
+    const decoded = jwt.verify(token, secret) as CustomerAuthUser
+    if (decoded.role !== 'CUSTOMER' && decoded.scope !== 'customer') return null
+    return decoded
+  } catch {
+    return null
+  }
+}
