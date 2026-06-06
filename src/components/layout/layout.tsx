@@ -293,7 +293,7 @@ export default function Layout({ children }: LayoutProps) {
               <div className="flex items-center group cursor-pointer" onClick={() => router.push('/')}>
                 <div className="relative">
                   <img
-                    src="/logo.jpeg?v=1"
+                    src="/logo.png"
                     alt="Logo"
                     className="h-8 sm:h-10 w-auto object-contain rounded-xl transition-transform duration-500 group-hover:scale-110 group-hover:rotate-3 shadow-lg group-hover:shadow-primary/20"
                     onError={(e) => {

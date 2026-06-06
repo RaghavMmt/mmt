@@ -43,7 +43,7 @@ export default function LoginPage() {
             <div className="flex justify-center mb-8">
               <div className="relative rounded-[2rem] p-5 shadow-premium bg-background border border-border/50 group hover:border-primary/30 transition-all duration-500">
                 <img
-                  src="/logo.jpeg?v=1"
+                  src="/logo.png"
                   alt="Company Logo"
                   className="h-20 w-auto object-contain mx-auto transition-transform duration-500 group-hover:scale-110"
                   onError={(e) => {
