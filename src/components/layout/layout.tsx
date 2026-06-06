@@ -290,19 +290,14 @@ export default function Layout({ children }: LayoutProps) {
               </div>
               
               {/* Logo */}
-              <div className="flex items-center group cursor-pointer" onClick={() => router.push('/')}>
-                <div className="relative">
-                  <img
-                    src="/logo.png"
-                    alt="Logo"
-                    className="h-8 sm:h-10 w-auto object-contain rounded-xl transition-transform duration-500 group-hover:scale-110 group-hover:rotate-3 shadow-lg group-hover:shadow-primary/20"
-                    onError={(e) => {
-                      console.error('Header logo failed to load')
-                      e.currentTarget.style.display = 'none'
-                    }}
-                  />
-                  <div className="absolute inset-0 rounded-xl bg-primary/20 blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                </div>
+              <div className="flex items-center cursor-pointer" onClick={() => router.push('/')}>
+                <img
+                  src="/logo.png"
+                  alt="Logo"
+                  width={48}
+                  height={48}
+                  className="h-12 w-12 object-contain"
+                />
               </div>
             </div>
 
