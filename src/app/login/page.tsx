@@ -39,17 +39,15 @@ export default function LoginPage() {
 
       <div className="w-full max-w-md relative z-10 animate-in fade-in zoom-in-95 duration-1000">
         <Card className="shadow-premium border-border/50 bg-card/60 backdrop-blur-xl rounded-[2.5rem]">
-          <CardHeader className="text-center pb-8 pt-10">
-            <div className="flex justify-center mb-8">
-              <img
-                src="/logo.png"
-                alt="Company Logo"
-                width={160}
-                height={160}
-                className="h-40 w-40 object-contain"
-              />
-            </div>
-            <h1 className="text-3xl font-black bg-clip-text text-transparent bg-gradient-to-r from-primary to-primary/60 tracking-tight mb-2">Welcome House of Tiles</h1>
+          <CardHeader className="text-center pb-4 pt-6">
+            <img
+              src="/logo.png"
+              alt="Company Logo"
+              width={200}
+              height={200}
+              className="h-48 w-48 object-contain mx-auto"
+            />
+            <h1 className="text-3xl font-black bg-clip-text text-transparent bg-gradient-to-r from-primary to-primary/60 tracking-tight">Welcome House of Tiles</h1>
             <p className="text-muted-foreground font-medium">Elevating your tile inventory management</p>
           </CardHeader>
 
